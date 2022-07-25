@@ -1,2 +1,2 @@
 # chat
-chat client and server with encryption
+chat client and server with encryption written in python
