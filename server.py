@@ -17,11 +17,14 @@ def listen_for_client(cs):
             msg = cs.recv(32768).decode()
         except:
             client_sockets.remove(cs)
-        for client_socket in client_sockets:
+        for client_socket in client_sockets.copy():
             try:
                 client_socket.send(msg.encode())
             except:
-                client_sockets.remove(cs)
+                try:
+                    client_sockets.remove(cs)
+                except:
+                    pass
 
 while True:
     client_socket, client_address = s.accept()
