@@ -101,7 +101,7 @@ def encrypt(arr):
                 tempnum = tempnum - numchars
             output.append(tempnum)
     for x in output:
-        outstring= outstring + ralphabet[x]
+        outstring = outstring + ralphabet[x]
     return(outstring)
 
 def listen_for_messages():
