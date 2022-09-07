@@ -8,7 +8,7 @@ client_sockets = set()
 s = socket.socket()
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((SERVER_HOST, SERVER_PORT))
-s.listen(20)
+s.listen(50)
 print('[*] Listening as {}:{}'.format(SERVER_HOST, SERVER_PORT))
 
 def listen_for_client(cs):
@@ -16,15 +16,20 @@ def listen_for_client(cs):
         try:
             msg = cs.recv(32768).decode()
         except:
-            client_sockets.remove(cs)
+            try:
+                client_sockets.remove(cs)
+                break
+            except:
+                break
         for client_socket in client_sockets.copy():
             try:
                 client_socket.send(msg.encode())
             except:
                 try:
                     client_sockets.remove(cs)
+                    break
                 except:
-                    pass
+                    break
 
 while True:
     client_socket, client_address = s.accept()
